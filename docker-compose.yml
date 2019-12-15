@@ -1,0 +1,41 @@
+version: '3'
+services:
+  db:
+      image: postgres:12
+      container_name: postgres12
+      environment:
+        - POSTGRES_USER=appdb
+        - POSTGRES_PASSWORD=appdb
+        - POSTGRES_DB=appdb
+      ports:
+        - "15432:5432"
+      volumes:
+        - postgres_db:/var/lib/postgresql/data
+        - ./postgres/initdb:/docker-entrypoint-initdb.d
+  nginx:
+      image: nginx:1.15
+      container_name: nginx
+      ports:
+        - "8000:8000"
+      volumes:
+        - ./nginx/conf:/etc/nginx/conf.d
+        - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+        - ./static:/static
+      depends_on:
+        - python
+  python:
+      build: ./python
+      image: python_django:1.0
+      container_name: python
+      command: uwsgi --ini /code/uwsgi_app.ini  --py-autoreload 1
+      volumes: 
+        - ./scripts:/code
+        - ./static:/static
+      expose:
+        - "8001"
+      ports:
+        - "7777:7777"
+      depends_on:
+        - db
+volumes:
+  postgres_db:
