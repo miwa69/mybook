@@ -1,0 +1,4 @@
+scripts/mybook/mybook/__pycache__/*
+scripts/mybook/cms/__pycache__/*
+static/*
+scripts/mybook/reload.trigger

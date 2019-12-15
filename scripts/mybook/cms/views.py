@@ -90,3 +90,11 @@ def impression_del(request, book_id, impression_id):
   impression = get_object_or_404(Impression, pk=impression_id)
   impression.delete()
   return redirect('cms:impression_list', book_id=book_id)
+
+
+def test(request):
+  ip_addr = request.META['REMOTE_ADDR']
+  return render(request,
+                'test.html',
+                {'ip_addr': ip_addr}
+                )

@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 
 urlpatterns = [
     path('cms/', include('cms.urls')),
     path('admin/', admin.site.urls),
 ]
+
+# debug-tools
+
+if settings.DEBUG:
+  import debug_toolbar
+
+  urlpatterns += [path('__debug__/', include(debug_toolbar.urls)), ]

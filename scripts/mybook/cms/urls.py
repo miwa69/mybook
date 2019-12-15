@@ -2,6 +2,7 @@
 from django.urls import path
 from cms import views
 
+
 app_name = 'cms'
 urlpatterns = [
     # 書籍
@@ -19,4 +20,5 @@ urlpatterns = [
          views.impression_edit, name='impression_mod'),  # 修正
     path('impression/del/<int:book_id>/<int:impression_id>/',
          views.impression_del, name='impression_del'),   # 削除
+    path('test/', views.test, name='test'),   # TEST
 ]

@@ -3,3 +3,4 @@ uwsgi
 psycopg2-binary
 psycopg2
 django-bootstrap4
+django-debug-toolbar
