@@ -33,8 +33,6 @@ services:
         - ./static:/static
       expose:
         - "8001"
-      ports:
-        - "7777:7777"
       depends_on:
         - db
 volumes:
